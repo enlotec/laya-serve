@@ -19,6 +19,20 @@ docker compose up --build
 docker compose -f docker-compose.yaml -f docker-compose.gpu.yaml up --build
 ```
 
+## Container images
+
+GitHub Actions publishes images to GitHub Container Registry when changes reach `main` and when a
+version tag is pushed:
+
+```bash
+docker pull ghcr.io/enlotec/laya-serve:latest
+docker pull ghcr.io/enlotec/laya-serve:latest-gpu
+```
+
+Version tags such as `v0.1.0` also publish `0.1.0` and `0.1` CPU tags plus `0.1.0-gpu` and
+`0.1-gpu` GPU tags. The images are public only after the GitHub package visibility is set to
+public for the first published version.
+
 ## HTTP API
 
 `POST /v1/systemone` accepts Laya's typed-decision request and response shape:
