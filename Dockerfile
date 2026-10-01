@@ -21,11 +21,11 @@ RUN uv pip install --system --no-cache .
 FROM base AS runtime-cpu
 COPY --from=build-cpu /usr/local/lib/python3.14/site-packages /usr/local/lib/python3.14/site-packages
 COPY --from=build-cpu /usr/local/bin/enlotec-laya-serve /usr/local/bin/enlotec-laya-serve
+COPY --chmod=755 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN useradd --create-home --uid 10001 laya
-USER laya
 EXPOSE 8089
 HEALTHCHECK --interval=20s --timeout=5s --retries=3 --start-period=90s CMD curl --fail http://localhost:8089/ready || exit 1
-ENTRYPOINT ["enlotec-laya-serve"]
+ENTRYPOINT ["docker-entrypoint.sh", "enlotec-laya-serve"]
 
 FROM base AS build-gpu
 WORKDIR /build
@@ -39,8 +39,8 @@ FROM base AS runtime-gpu
 ENV TORCH_DISABLE_NATIVE_JIT=1
 COPY --from=build-gpu /usr/local/lib/python3.14/site-packages /usr/local/lib/python3.14/site-packages
 COPY --from=build-gpu /usr/local/bin/enlotec-laya-serve /usr/local/bin/enlotec-laya-serve
+COPY --chmod=755 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN useradd --create-home --uid 10001 laya
-USER laya
 EXPOSE 8089
 HEALTHCHECK --interval=20s --timeout=5s --retries=3 --start-period=90s CMD curl --fail http://localhost:8089/ready || exit 1
-ENTRYPOINT ["enlotec-laya-serve"]
+ENTRYPOINT ["docker-entrypoint.sh", "enlotec-laya-serve"]
