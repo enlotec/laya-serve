@@ -12,6 +12,14 @@ def test_laya_environment_prefix_and_csv_settings():
     assert settings.cors_origins == ("https://a", "https://b")
 
 
+def test_csv_environment_values_do_not_require_json(monkeypatch):
+    monkeypatch.setenv("LAYA_MODELS", "english,multilingual")
+    monkeypatch.setenv("LAYA_CORS_ORIGINS", "https://studio.example,https://api.example")
+    settings = Settings(_env_file=None)
+    assert settings.models == ("english", "multilingual")
+    assert settings.cors_origins == ("https://studio.example", "https://api.example")
+
+
 def test_mcp_prediction_reuses_validation_before_engine_load(monkeypatch):
     from laya_serve.modules.mcp import server
 

@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import Field, SecretStr, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     port: int = Field(default=8089, ge=1, le=65535)
     log_level: str = "info"
     device: Literal["auto", "cpu", "cuda", "mps", "xpu"] = "auto"
-    models: tuple[str, ...] = ("english", "multilingual")
+    models: Annotated[tuple[str, ...], NoDecode] = ("english", "multilingual")
     revision: str | None = None
     preload: bool = True
     max_loaded: int = Field(default=2, ge=1, le=3)
@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     max_batch_states: int = Field(default=64, ge=1, le=1_000)
     max_token_budget: int = Field(default=8_192, ge=128, le=16_384)
     api_key: SecretStr | None = None
-    cors_origins: tuple[str, ...] = ()
+    cors_origins: Annotated[tuple[str, ...], NoDecode] = ()
 
     @field_validator("models", "cors_origins", mode="before")
     @classmethod
