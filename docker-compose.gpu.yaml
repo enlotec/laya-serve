@@ -1,0 +1,14 @@
+services:
+  laya:
+    build:
+      target: runtime-gpu
+    image: laya-serve:latest-gpu
+    environment:
+      LAYA_DEVICE: cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

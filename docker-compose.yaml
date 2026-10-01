@@ -1,0 +1,19 @@
+services:
+  laya:
+    build:
+      context: .
+      target: runtime-cpu
+    image: laya-serve:latest
+    ports:
+      - "${LAYA_PORT:-8089}:8089"
+    environment:
+      LAYA_DEVICE: cpu
+      LAYA_MODELS: "${LAYA_MODELS:-english,multilingual}"
+      LAYA_PRELOAD: "${LAYA_PRELOAD:-true}"
+      LAYA_THREADS: "${LAYA_THREADS:-4}"
+    volumes:
+      - laya_cache:/home/laya/.cache/huggingface
+    restart: unless-stopped
+
+volumes:
+  laya_cache:
