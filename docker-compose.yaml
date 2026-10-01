@@ -8,7 +8,7 @@ services:
       - "${LAYA_PORT:-8089}:8089"
     environment:
       LAYA_DEVICE: cpu
-      LAYA_MODELS: "${LAYA_MODELS:-english,multilingual}"
+      LAYA_MODELS: '["english","multilingual"]'
       LAYA_PRELOAD: "${LAYA_PRELOAD:-true}"
       LAYA_THREADS: "${LAYA_THREADS:-4}"
     volumes:

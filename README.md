@@ -69,6 +69,7 @@ public for the first published version.
 Use `LAYA_API_KEY` to require `Authorization: Bearer <key>`. Settings are documented in [`.env.example`](.env.example).
 Set `LAYA_REVISION` to a reviewed Hugging Face commit or tag in a production deployment; the
 selected revision is included in `GET /v1/models`.
+`LAYA_MODELS` accepts either a comma-separated list such as `english,multilingual` or a JSON array.
 
 ## MCP
 
