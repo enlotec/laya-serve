@@ -2,6 +2,11 @@
 
 Production-ready REST and MCP wrapper for [Laya](https://github.com/NandhaKishorM/laya), Convai Innovations' Apache-2.0, open-source System One decision model. It exposes Laya's typed-decision protocol with explicit readiness, bounded concurrency, typed configuration, and reproducible CPU/GPU containers.
 
+## License
+
+Laya Serve is open-source software licensed under the [Apache License 2.0](LICENSE), the same
+permissive license used by Laya. Copyright © enlotec.
+
 ## Run locally
 
 Python 3.14 is required.
