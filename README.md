@@ -86,3 +86,8 @@ uv run ruff check .
 ```
 
 This package intentionally fails startup if real Laya checkpoints cannot load; it never synthesizes model responses.
+
+## Acknowledgment
+
+Thank you to the [Laya team](https://github.com/NandhaKishorM/laya) at Convai Innovations for
+creating and maintaining the open-source Laya decision model that powers this service.
