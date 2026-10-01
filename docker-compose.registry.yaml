@@ -1,11 +1,8 @@
 services:
   laya:
-    build:
-      context: .
-      target: runtime-cpu
-    image: laya-serve:latest
+    image: "${LAYA_IMAGE:-ghcr.io/enlotec/laya-serve:latest}"
     ports:
-      - "${LAYA_PORT:-8089}:8089"
+      - "127.0.0.1:${LAYA_PORT:-8089}:8089"
     env_file:
       - path: .env
         required: false
